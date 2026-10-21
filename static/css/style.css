@@ -140,45 +140,38 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; color: var(--navy);
   .site-nav .btn { margin-top: 16px; }
 }
 
-/* ---------- Hero ---------- */
+/* ---------- Hero ----------
+   Background photo: static/img/hero.jpg (landscape, at least 1920px wide).
+   The navy overlay keeps the text readable; without a photo the hero is plain navy. */
 .hero {
-  background: var(--navy);
+  position: relative;
   color: var(--white);
-  overflow: hidden;
+  background-color: var(--navy);
+  background-image:
+    linear-gradient(90deg, rgba(8, 29, 53, .92) 0%, rgba(8, 29, 53, .78) 45%, rgba(8, 29, 53, .35) 100%),
+    var(--hero-img, none);
+  background-size: cover;
+  background-position: center right;
 }
 .hero-inner {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  align-items: end;
-  gap: clamp(24px, 5vw, 72px);
-  padding-top: clamp(48px, 8vw, 104px);
+  display: flex; flex-direction: column; justify-content: center;
+  min-height: min(78vh, 720px);
+  padding-top: clamp(56px, 9vw, 112px);
+  padding-bottom: clamp(56px, 9vw, 112px);
 }
-.hero-copy { padding-bottom: clamp(48px, 7vw, 96px); }
-.hero h1 { max-width: 14ch; }
+.hero h1 { max-width: 15ch; }
 .lede { margin-top: 22px; max-width: 46ch; font-size: 1.15rem; color: #D5E2EF; }
 .hero .actions { margin-top: 32px; }
 .hero-place { margin-top: 22px; font-size: .95rem; color: var(--steel-light); }
 
-.hero-art svg { width: 100%; height: auto; overflow: visible; }
-.cyl-body { fill: #F4F7FA; }
-.cyl-band { fill: var(--steel); }
-g:nth-of-type(2n) > .cyl .cyl-band { fill: var(--steel-light); }
-.cyl-neck { fill: #B8C6D4; }
-.cyl-valve { fill: #9FB0C2; }
-.cyl-wheel { fill: var(--steel-light); }
-.cyl-label {
-  font-family: var(--font); font-stretch: 100%; font-weight: 800; font-size: 28px;
-  fill: var(--navy);
-}
-.cyl-sub { font-size: 17px; }
-.ground { fill: var(--steel); }
-
-/* One load moment: the cylinders are set down on the ground one after another. */
-@media (prefers-reduced-motion: no-preference) {
-  .cyl { animation: set-down .7s cubic-bezier(.2, .8, .25, 1) both; animation-delay: calc(var(--i) * 110ms + 150ms); }
-  @keyframes set-down {
-    from { transform: translateY(-60px); opacity: 0; }
+@media (max-width: 760px) {
+  .hero {
+    background-image:
+      linear-gradient(180deg, rgba(8, 29, 53, .88) 0%, rgba(8, 29, 53, .8) 100%),
+      var(--hero-img, none);
+    background-position: center;
   }
+  .hero-inner { min-height: 0; }
 }
 
 /* ---------- Sections ---------- */
@@ -312,10 +305,3 @@ g:nth-of-type(2n) > .cyl .cyl-band { fill: var(--steel-light); }
 }
 .wa-float:hover { background: var(--whatsapp-dark); color: var(--white); }
 @media (max-width: 520px) { .wa-float span { display: none; } .wa-float { padding: 14px; } }
-
-/* ---------- Hero on smaller screens ---------- */
-@media (max-width: 860px) {
-  .hero-inner { grid-template-columns: minmax(0, 1fr); gap: 0; }
-  .hero-copy { padding-bottom: 40px; }
-  .hero-art { max-width: 420px; }
-}

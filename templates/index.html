@@ -57,7 +57,7 @@
   </header>
 
   <main id="main">
-    <section class="hero" id="top">
+    <section class="hero" id="top" style="--hero-img: url('{{ url_for('static', filename='img/hero.jpg') }}')">
       <div class="wrap hero-inner">
         <div class="hero-copy">
           <h1>Oxygen, CO<sub>2</sub>, nitrogen and argon cylinders in&nbsp;Kota</h1>
@@ -68,24 +68,6 @@
           </div>
           <p class="hero-place">Indraprastha Industrial Area, Kota, Rajasthan</p>
         </div>
-
-        <figure class="hero-art" aria-hidden="true">
-          <svg viewBox="0 0 500 430" role="img">
-            {% set tops = [40, 110, 70, 95] %}
-            {% for p in products %}
-            {% set T = tops[loop.index0] %}
-            <g transform="translate({{ 15 + loop.index0 * 120 }} 0)"><g class="cyl" style="--i: {{ loop.index0 }}">
-              <rect class="cyl-wheel" x="28" y="{{ T - 40 }}" width="44" height="9" rx="4.5"/>
-              <rect class="cyl-valve" x="36" y="{{ T - 31 }}" width="28" height="17" rx="3"/>
-              <rect class="cyl-neck" x="41" y="{{ T - 14 }}" width="18" height="15"/>
-              <path class="cyl-body" d="M10 392 Q10 400 18 400 L82 400 Q90 400 90 392 L90 {{ T + 46 }} C90 {{ T + 14 }} 72 {{ T }} 58 {{ T }} L42 {{ T }} C28 {{ T }} 10 {{ T + 14 }} 10 {{ T + 46 }} Z"/>
-              <rect class="cyl-band" x="10" y="{{ T + 54 }}" width="80" height="14"/>
-              <text class="cyl-label" x="50" y="{{ (T + 400) // 2 + 30 }}" text-anchor="middle">{% if p.formula_text.endswith('2') %}{{ p.formula_text[:-1] }}<tspan class="cyl-sub" dy="5">2</tspan>{% else %}{{ p.formula_text }}{% endif %}</text>
-            </g></g>
-            {% endfor %}
-            <rect class="ground" x="0" y="400" width="500" height="3"/>
-          </svg>
-        </figure>
       </div>
     </section>
 
