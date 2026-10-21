@@ -8,6 +8,7 @@ checked with Star Industrial Gases before the site goes live.
 
 BUSINESS = {
     "name": "Star Industrial Gases",
+    "site_url": "https://starindustrialgases.in",   # the live domain, no trailing slash
     "city": "Kota",
     "phone_display": "095714 36929",
     "phone_tel": "+919571436929",
