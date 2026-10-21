@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ biz.name }} | Oxygen, CO₂, Nitrogen &amp; Argon Cylinders in Kota</title>
+  <meta name="description" content="{{ biz.name }} supplies oxygen, carbon dioxide, nitrogen and argon gas cylinders to workshops, factories and plants in Kota, Rajasthan. Call or WhatsApp {{ biz.phone_display }}.">
+  <meta name="theme-color" content="#0D2B4C">
+  <meta property="og:title" content="{{ biz.name }}, Kota">
+  <meta property="og:description" content="Oxygen, CO₂, nitrogen and argon gas cylinders in Kota. Call or WhatsApp {{ biz.phone_display }}.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="{{ url_for('static', filename='img/logo.png', _external=True) }}">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" sizes="any">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
+  <link rel="preload" href="{{ url_for('static', filename='fonts/archivo-variable.woff2') }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "{{ biz.name }}",
+    "description": "Industrial gas supplier in Kota, Rajasthan: oxygen, carbon dioxide, nitrogen and argon cylinders.",
+    "telephone": "{{ biz.phone_tel }}",
+    "image": "{{ url_for('static', filename='img/logo.png', _external=True) }}",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "A1, E-132, Road Number 5, Indraprastha Industrial Area",
+      "addressLocality": "Kota",
+      "addressRegion": "Rajasthan",
+      "postalCode": "324005",
+      "addressCountry": "IN"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="{{ biz.name }}, home">
+        <img src="{{ url_for('static', filename='img/star-mark.png') }}" alt="" width="40" height="40">
+        <span class="brand-text"><strong>Star</strong><span>Industrial Gases</span></span>
+      </a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">
+        <span class="menu-bars" aria-hidden="true"></span><span class="menu-label">Menu</span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <a href="#gases">Gases</a>
+        <a href="#order">How to order</a>
+        <a href="#industries">Who we supply</a>
+        <a href="#contact">Contact</a>
+        <a class="btn btn-small btn-solid" href="tel:{{ biz.phone_tel }}">Call {{ biz.phone_display }}</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <h1>Oxygen, CO<sub>2</sub>, nitrogen and argon cylinders in&nbsp;Kota</h1>
+          <p class="lede">{{ biz.name }} fills and supplies industrial gas cylinders for workshops, factories and plants across Kota. Call or WhatsApp us to order.</p>
+          <div class="actions">
+            <a class="btn btn-light" href="tel:{{ biz.phone_tel }}">Call {{ biz.phone_display }}</a>
+            <a class="btn btn-whatsapp" href="{{ whatsapp_link('Hi Star Industrial Gases, I would like to order gas cylinders.') }}" target="_blank" rel="noopener">Order on WhatsApp</a>
+          </div>
+          <p class="hero-place">Indraprastha Industrial Area, Kota, Rajasthan</p>
+        </div>
+
+        <figure class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 500 430" role="img">
+            {% set tops = [40, 110, 70, 95] %}
+            {% for p in products %}
+            {% set T = tops[loop.index0] %}
+            <g transform="translate({{ 15 + loop.index0 * 120 }} 0)"><g class="cyl" style="--i: {{ loop.index0 }}">
+              <rect class="cyl-wheel" x="28" y="{{ T - 40 }}" width="44" height="9" rx="4.5"/>
+              <rect class="cyl-valve" x="36" y="{{ T - 31 }}" width="28" height="17" rx="3"/>
+              <rect class="cyl-neck" x="41" y="{{ T - 14 }}" width="18" height="15"/>
+              <path class="cyl-body" d="M10 392 Q10 400 18 400 L82 400 Q90 400 90 392 L90 {{ T + 46 }} C90 {{ T + 14 }} 72 {{ T }} 58 {{ T }} L42 {{ T }} C28 {{ T }} 10 {{ T + 14 }} 10 {{ T + 46 }} Z"/>
+              <rect class="cyl-band" x="10" y="{{ T + 54 }}" width="80" height="14"/>
+              <text class="cyl-label" x="50" y="{{ (T + 400) // 2 + 30 }}" text-anchor="middle">{% if p.formula_text.endswith('2') %}{{ p.formula_text[:-1] }}<tspan class="cyl-sub" dy="5">2</tspan>{% else %}{{ p.formula_text }}{% endif %}</text>
+            </g></g>
+            {% endfor %}
+            <rect class="ground" x="0" y="400" width="500" height="3"/>
+          </svg>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section gases" id="gases" aria-labelledby="gases-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="gases-title">Our gases</h2>
+          <p>Purity and cylinder sizes for each gas. If you need a size that isn't listed, ask us.</p>
+        </div>
+
+        <div class="spec-sheet">
+          {% for p in products %}
+          <article class="gas" id="{{ p.id }}">
+            <div class="gas-formula" aria-hidden="true">{{ p.formula | safe }}</div>
+            <div class="gas-name">
+              <h3>{{ p.name }}</h3>
+              <p>{{ p.summary | chem }}</p>
+            </div>
+            <dl class="gas-specs">
+              <div><dt>Purity</dt><dd>{{ p.purity }}</dd></div>
+              <div><dt>Cylinder sizes</dt><dd>{% for s in p.sizes %}<span>{{ s | chem }}</span>{% endfor %}</dd></div>
+            </dl>
+            <div class="gas-uses">
+              <h4>Used for</h4>
+              <ul>{% for u in p.uses %}<li>{{ u | chem }}</li>{% endfor %}</ul>
+            </div>
+            <a class="gas-order" href="{{ whatsapp_link('Hi Star Industrial Gases, I need ' + p.name|lower + ' (' + p.formula_text + ') cylinders. Size: ___ Quantity: ___') }}" target="_blank" rel="noopener">Order {{ p.name|lower }} on WhatsApp</a>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <section class="section order" id="order" aria-labelledby="order-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="order-title">How to order</h2>
+        </div>
+        <ol class="steps">
+          {% for title, text in steps %}
+          <li><h3>{{ title | chem }}</h3><p>{{ text | chem }}</p></li>
+          {% endfor %}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section industries" id="industries" aria-labelledby="industries-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="industries-title">Who we supply</h2>
+          <p>Businesses across Kota that cut, weld, test, pack and fill.</p>
+        </div>
+        <ul class="industry-list">
+          {% for name, text in industries %}
+          <li><h3>{{ name | chem }}</h3><p>{{ text | chem }}</p></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section why" id="why" aria-labelledby="why-title">
+      <div class="wrap why-inner">
+        <h2 id="why-title">Why buy from Star</h2>
+        <ul class="reasons">
+          {% for title, text in reasons %}
+          <li><h3>{{ title | chem }}</h3><p>{{ text | chem }}</p></li>
+          {% endfor %}
+        </ul>
+        {% if biz.certifications %}
+        <ul class="certs">{% for c in biz.certifications %}<li>{{ c }}</li>{% endfor %}</ul>
+        {% endif %}
+      </div>
+    </section>
+
+    <section class="section contact" id="contact" aria-labelledby="contact-title">
+      <div class="wrap contact-inner">
+        <div class="contact-details">
+          <h2 id="contact-title">Visit or call us</h2>
+          <dl>
+            <div>
+              <dt>Address</dt>
+              <dd><address>{% for line in biz.address_lines %}{{ line }}<br>{% endfor %}</address>
+                <a href="{{ map_link }}" target="_blank" rel="noopener">Get directions</a></dd>
+            </div>
+            <div>
+              <dt>Phone and WhatsApp</dt>
+              <dd><a class="big-link" href="tel:{{ biz.phone_tel }}">{{ biz.phone_display }}</a></dd>
+            </div>
+            {% if biz.email %}
+            <div><dt>Email</dt><dd><a href="mailto:{{ biz.email }}">{{ biz.email }}</a></dd></div>
+            {% endif %}
+            <div><dt>Hours</dt><dd>{{ biz.hours }}</dd></div>
+            <div><dt>Service area</dt><dd>{{ biz.service_area }}</dd></div>
+          </dl>
+          <div class="actions">
+            <a class="btn btn-solid" href="tel:{{ biz.phone_tel }}">Call now</a>
+            <a class="btn btn-whatsapp" href="{{ whatsapp_link('Hi Star Industrial Gases, I have an enquiry.') }}" target="_blank" rel="noopener">Message on WhatsApp</a>
+          </div>
+        </div>
+        <div class="map">
+          <iframe title="Map showing {{ biz.name }} in Indraprastha Industrial Area, Kota" src="{{ map_embed }}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <img src="{{ url_for('static', filename='img/logo-white.png') }}" alt="{{ biz.name }}" width="100" height="120" loading="lazy">
+      <div class="footer-text">
+        <p>Oxygen, carbon dioxide, nitrogen and argon cylinders for industry in Kota, Rajasthan.</p>
+        <p><a href="tel:{{ biz.phone_tel }}">{{ biz.phone_display }}</a></p>
+        <p class="copy">© {{ year }} {{ biz.name }}</p>
+      </div>
+    </div>
+  </footer>
+
+  <a class="wa-float" href="{{ whatsapp_link('Hi Star Industrial Gases, I would like to order gas cylinders.') }}" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+    <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.7l-.4-.3-3.8 1.2 1.2-3.7-.3-.4c-1.2-1.8-1.8-3.8-1.8-5.9 0-5.9 4.9-10.6 10.9-10.6s10.9 4.8 10.9 10.6S22 26.4 16 26.4zm6-7.9c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.8 5 .8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg>
+    <span>WhatsApp</span>
+  </a>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</body>
+</html>
