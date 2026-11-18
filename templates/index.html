@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ biz.name }} | Oxygen, CO₂, Nitrogen &amp; Argon Cylinders in Kota</title>
-  <meta name="description" content="{{ biz.name }} supplies oxygen, carbon dioxide, nitrogen and argon gas cylinders to workshops, factories and plants in Kota, Rajasthan. Call or WhatsApp {{ biz.phone_display }}.">
+  <title>{{ biz.name }} | Oxygen, CO₂, Nitrogen, Argon &amp; DA Supplier in Kota</title>
+  <meta name="description" content="{{ biz.name }} supplies oxygen, CO₂, nitrogen (gas and liquid), argon, dissolved acetylene and gas mixtures to plants and workshops in Kota, Rajasthan. Call or WhatsApp {{ biz.phone_display }}.">
   <meta name="theme-color" content="#0D2B4C">
   <meta property="og:title" content="{{ biz.name }}, Kota">
-  <meta property="og:description" content="Oxygen, CO₂, nitrogen and argon gas cylinders in Kota. Call or WhatsApp {{ biz.phone_display }}.">
+  <meta property="og:description" content="Oxygen, CO₂, nitrogen, argon, DA and gas mixtures in Kota. Call or WhatsApp {{ biz.phone_display }}.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="{{ biz.site_url ~ asset('img/logo.png') }}">
   <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
@@ -20,7 +20,7 @@
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "{{ biz.name }}",
-    "description": "Industrial gas supplier in Kota, Rajasthan: oxygen, carbon dioxide, nitrogen and argon cylinders.",
+    "description": "Industrial gas supplier in Kota, Rajasthan: oxygen, carbon dioxide, nitrogen, argon, dissolved acetylene and gas mixtures.",
     "telephone": "{{ biz.phone_tel }}",
     "image": "{{ biz.site_url ~ asset('img/logo.png') }}",
     "address": {
@@ -48,8 +48,8 @@
       </button>
       <nav id="site-nav" class="site-nav" aria-label="Main">
         <a href="#gases">Gases</a>
-        <a href="#order">How to order</a>
-        <a href="#industries">Who we supply</a>
+        <a href="#industries">Industries</a>
+        <a href="#clients">Clients</a>
         <a href="#contact">Contact</a>
         <a class="btn btn-small btn-solid" href="tel:{{ biz.phone_tel }}">Call {{ biz.phone_display }}</a>
       </nav>
@@ -60,8 +60,8 @@
     <section class="hero" id="top"{% if has_asset('img/hero.jpg') %} style="--hero-img: url('{{ asset('img/hero.jpg') }}')"{% endif %}>
       <div class="wrap hero-inner">
         <div class="hero-copy">
-          <h1>Oxygen, CO<sub>2</sub>, nitrogen and argon cylinders in&nbsp;Kota</h1>
-          <p class="lede">{{ biz.name }} fills and supplies industrial gas cylinders for workshops, factories and plants across Kota. Call or WhatsApp us to order.</p>
+          <h1>Industrial gases for Kota's plants and workshops</h1>
+          <p class="lede">Oxygen, CO<sub>2</sub>, nitrogen (gas and liquid), argon, dissolved acetylene and gas mixtures, filled and supplied by {{ biz.name }}. Call or WhatsApp us to order.</p>
           <div class="actions">
             <a class="btn btn-light" href="tel:{{ biz.phone_tel }}">Call {{ biz.phone_display }}</a>
             <a class="btn btn-whatsapp" href="{{ whatsapp_link('Hi Star Industrial Gases, I would like to order gas cylinders.') }}" target="_blank" rel="noopener">Order on WhatsApp</a>
@@ -75,50 +75,39 @@
       <div class="wrap">
         <div class="section-head">
           <h2 id="gases-title">Our gases</h2>
-          <p>Purity and cylinder sizes for each gas. If you need a size that isn't listed, ask us.</p>
+          <p>Purity, grades and cylinder sizes for each gas. If you need something that isn't listed, ask us.</p>
         </div>
 
         <div class="spec-sheet">
           {% for p in products %}
           <article class="gas" id="{{ p.id }}">
-            <div class="gas-formula" aria-hidden="true">{{ p.formula | safe }}</div>
+            <div class="gas-formula{% if p.formula_size %} gas-formula--{{ p.formula_size }}{% endif %}" aria-hidden="true">{{ p.formula | safe }}</div>
             <div class="gas-name">
               <h3>{{ p.name }}</h3>
               <p>{{ p.summary | chem }}</p>
             </div>
             <dl class="gas-specs">
-              <div><dt>Purity</dt><dd>{{ p.purity }}</dd></div>
-              <div><dt>Cylinder sizes</dt><dd>{% for s in p.sizes %}<span>{{ s | chem }}</span>{% endfor %}</dd></div>
+              {% for label, values in p.specs %}
+              <div{% if label == 'Purity' %} class="spec-key"{% endif %}><dt>{{ label }}</dt><dd>{% for v in values %}<span>{{ v | chem }}</span>{% endfor %}</dd></div>
+              {% endfor %}
             </dl>
             <div class="gas-uses">
               <h4>Used for</h4>
               <ul>{% for u in p.uses %}<li>{{ u | chem }}</li>{% endfor %}</ul>
             </div>
-            <a class="gas-order" href="{{ whatsapp_link('Hi Star Industrial Gases, I need ' + p.name|lower + ' (' + p.formula_text + ') cylinders. Size: ___ Quantity: ___') }}" target="_blank" rel="noopener">Order {{ p.name|lower }} on WhatsApp</a>
+            {% set short = p.short_name or p.name|lower %}
+            <a class="gas-order" href="{{ whatsapp_link('Hi Star Industrial Gases, I would like to order ' + short + '. Grade/size: ___ Quantity: ___') }}" target="_blank" rel="noopener">Order {{ short }} on WhatsApp</a>
           </article>
           {% endfor %}
         </div>
       </div>
     </section>
 
-    <section class="section order" id="order" aria-labelledby="order-title">
-      <div class="wrap">
-        <div class="section-head">
-          <h2 id="order-title">How to order</h2>
-        </div>
-        <ol class="steps">
-          {% for title, text in steps %}
-          <li><h3>{{ title | chem }}</h3><p>{{ text | chem }}</p></li>
-          {% endfor %}
-        </ol>
-      </div>
-    </section>
-
     <section class="section industries" id="industries" aria-labelledby="industries-title">
       <div class="wrap">
         <div class="section-head">
-          <h2 id="industries-title">Who we supply</h2>
-          <p>Businesses across Kota that cut, weld, test, pack and fill.</p>
+          <h2 id="industries-title">Industries we serve</h2>
+          <p>From power and fertiliser plants to local fabrication shops, we supply gases to industry across Kota.</p>
         </div>
         <ul class="industry-list">
           {% for name, text in industries %}
@@ -128,17 +117,20 @@
       </div>
     </section>
 
-    <section class="section why" id="why" aria-labelledby="why-title">
-      <div class="wrap why-inner">
-        <h2 id="why-title">Why buy from Star</h2>
-        <ul class="reasons">
-          {% for title, text in reasons %}
-          <li><h3>{{ title | chem }}</h3><p>{{ text | chem }}</p></li>
+    <section class="section clients" id="clients" aria-labelledby="clients-title">
+      <div class="wrap">
+        <div class="section-head">
+          <h2 id="clients-title">Our clients</h2>
+          <p>Some of the plants and industries in and around Kota that rely on Star for their gas supply.</p>
+        </div>
+        <ul class="client-list">
+          {% for slug, name in clients %}
+          {% set logo = client_logo(slug) %}
+          <li class="client{% if not logo %} client--text{% endif %}">
+            {% if logo %}<img src="{{ logo }}" alt="{{ name }}" loading="lazy">{% else %}<span>{{ name }}</span>{% endif %}
+          </li>
           {% endfor %}
         </ul>
-        {% if biz.certifications %}
-        <ul class="certs">{% for c in biz.certifications %}<li>{{ c }}</li>{% endfor %}</ul>
-        {% endif %}
       </div>
     </section>
 
@@ -178,7 +170,7 @@
     <div class="wrap footer-inner">
       <img src="{{ asset('img/logo-white.png') }}" alt="{{ biz.name }}" width="100" height="120" loading="lazy">
       <div class="footer-text">
-        <p>Oxygen, carbon dioxide, nitrogen and argon cylinders for industry in Kota, Rajasthan.</p>
+        <p>Oxygen, CO<sub>2</sub>, nitrogen, argon, DA and gas mixtures for industry in Kota, Rajasthan.</p>
         <p><a href="tel:{{ biz.phone_tel }}">{{ biz.phone_display }}</a></p>
         <p class="copy">© {{ year }} {{ biz.name }}</p>
       </div>

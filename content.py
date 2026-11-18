@@ -3,7 +3,7 @@ All website text and business details live in this one file.
 Edit the values here, push to GitHub, and Render redeploys the site.
 
 Lines marked  # CONFIRM  are placeholder values that still need to be
-checked with Star Industrial Gases before the site goes live.
+checked with Star Industrial Gases.
 """
 
 BUSINESS = {
@@ -22,9 +22,9 @@ BUSINESS = {
     "map_query": "Star Industrial Gases, A1 E-132, Rd Number 5, Indraprastha Industrial Area, Kota, Rajasthan 324005",
     "hours": "Monday to Saturday, 9:00 am to 7:00 pm",                 # CONFIRM
     "service_area": "Kota city and nearby industrial areas",          # CONFIRM
-    "certifications": [],  # e.g. ["PESO licensed", "GST registered"]  # CONFIRM
 }
 
+# Each gas: "specs" is a list of (label, [values]). The "Purity" value is shown large.
 PRODUCTS = [
     {
         "id": "oxygen",
@@ -32,8 +32,10 @@ PRODUCTS = [
         "formula_text": "O2",
         "name": "Oxygen",
         "summary": "Industrial oxygen for gas cutting, welding and brazing.",
-        "purity": "99.5%",                                             # CONFIRM
-        "sizes": ["7 m³ (47 L) cylinder", "1.5 m³ (10 L) cylinder"],   # CONFIRM
+        "specs": [
+            ("Purity", ["99.5%"]),                                     # CONFIRM
+            ("Cylinder size", ["7 m³ (47 L) cylinder"]),               # CONFIRM
+        ],
         "uses": ["Gas cutting of steel", "Oxy-fuel welding and brazing", "Metal fabrication shops"],
     },
     {
@@ -42,8 +44,10 @@ PRODUCTS = [
         "formula_text": "CO2",
         "name": "Carbon dioxide",
         "summary": "CO₂ for MIG welding, beverages and fire extinguisher refilling.",
-        "purity": "99.9%",                                             # CONFIRM
-        "sizes": ["30 kg cylinder", "22.5 kg cylinder"],               # CONFIRM
+        "specs": [
+            ("Purity", ["99.9%"]),                                     # CONFIRM
+            ("Cylinder size", ["30 kg cylinder"]),                     # CONFIRM
+        ],
         "uses": ["MIG / CO₂ welding", "Soda and beverage dispensing", "Fire extinguisher refilling"],
     },
     {
@@ -51,43 +55,68 @@ PRODUCTS = [
         "formula": "N<sub>2</sub>",
         "formula_text": "N2",
         "name": "Nitrogen",
-        "summary": "Inert nitrogen for purging, pressure testing and packaging.",
-        "purity": "99.99%",                                            # CONFIRM
-        "sizes": ["7 m³ (47 L) cylinder"],                             # CONFIRM
-        "uses": ["Pipeline purging and pressure testing", "Food packaging", "Tyre and accumulator filling"],
+        "summary": "Inert nitrogen, as compressed gas or liquid, for purging, testing and cooling.",
+        "specs": [
+            ("Purity", ["99.99%"]),                                    # CONFIRM
+            ("Available as", ["Gas: 7 m³ (47 L) cylinder", "Liquid nitrogen"]),  # CONFIRM
+        ],
+        "uses": ["Pipeline purging and pressure testing", "Food packaging", "Liquid nitrogen for cooling and freezing"],
     },
     {
         "id": "argon",
         "formula": "Ar",
         "formula_text": "Ar",
         "name": "Argon",
-        "summary": "High-purity argon for TIG welding of stainless steel and aluminium.",
-        "purity": "99.999%",                                           # CONFIRM
-        "sizes": ["7 m³ (47 L) cylinder"],                             # CONFIRM
-        "uses": ["TIG welding", "Stainless steel and aluminium welding", "Laboratory use"],
+        "summary": "Argon in three grades, for TIG welding through to laboratory work.",
+        "specs": [
+            ("Grades", ["Commercial", "Grade 1", "UHP (ultra high purity)"]),
+            ("Cylinder size", ["7 m³ (47 L) cylinder"]),               # CONFIRM
+        ],
+        "uses": ["TIG welding", "Stainless steel and aluminium welding", "Laboratory and analytical use (UHP)"],
+    },
+    {
+        "id": "dissolved-acetylene",
+        "formula": "C<sub>2</sub>H<sub>2</sub>",
+        "formula_text": "DA",
+        "formula_size": "long",
+        "name": "Dissolved acetylene (DA)",
+        "short_name": "DA",
+        "summary": "Acetylene fuel gas for oxy-acetylene cutting, welding and heating.",
+        "specs": [
+            ("Supplied in", ["DA cylinders"]),                         # CONFIRM sizes
+        ],
+        "uses": ["Oxy-acetylene gas cutting", "Gas welding and brazing", "Heating and flame work"],
+    },
+    {
+        "id": "gas-mixtures",
+        "formula": "Mix",
+        "formula_text": "mixture",
+        "name": "Gas mixtures",
+        "summary": "Shielding gas mixtures for cleaner, more consistent welds.",
+        "specs": [
+            ("Mixtures", ["Argon + CO₂", "Other blends on request"]),  # CONFIRM
+        ],
+        "uses": ["MIG welding of mild steel", "Stainless steel welding", "Mixtures made to your requirement"],
     },
 ]
 
 INDUSTRIES = [
+    ("Power plants", "Gases for maintenance, purging and testing."),
+    ("Fertiliser and chemical plants", "Purging, blanketing and pressure testing."),
+    ("Metal and steel industry", "Cutting, welding and processing of metals."),
     ("Fabrication and welding", "Workshops cutting, welding and joining steel."),
     ("Engineering and manufacturing", "Production units in Kota's industrial areas."),
-    ("Chemical and process plants", "Purging, blanketing and pressure testing."),
     ("Food and beverage", "CO₂ for soda and nitrogen for packaging."),
-    ("Construction and infrastructure", "On-site cutting and welding for structures."),
     ("Fire safety", "CO₂ for refilling fire extinguishers."),
-    ("Automobile workshops", "Welding, cutting and nitrogen tyre filling."),
-    ("Laboratories and institutes", "Argon and nitrogen for testing and research."),
+    ("Laboratories and institutes", "UHP argon and nitrogen for testing and research."),
 ]
 
-REASONS = [
-    ("Local to Kota", "Our filling station is in Indraprastha Industrial Area, close to the workshops and factories we supply."),
-    ("Order by phone or WhatsApp", "Tell us the gas, cylinder size and quantity. No forms or accounts."),
-    ("Four core gases", "Oxygen, carbon dioxide, nitrogen and argon, so one supplier covers most workshop needs."),
-    ("Refills and new cylinders", "Bring your empty cylinders for refilling, or ask us for new ones."),  # CONFIRM
-]
-
-ORDER_STEPS = [
-    ("Call or WhatsApp us", "Reach us on 095714 36929."),
-    ("Tell us what you need", "The gas, cylinder size and how many cylinders."),
-    ("Collect or receive delivery", "Pick up from our station or ask about delivery to your site."),  # CONFIRM
+# Client logos: save each file as static/img/clients/<slug>.png (or .svg / .jpg / .webp).
+# Until a logo file exists, the client's name is shown instead.
+CLIENTS = [
+    ("dcm", "DCM Shriram"),                              # CONFIRM name
+    ("om-metals", "Om Metals"),
+    ("multimetals", "Multimetals"),
+    ("cfcl", "Chambal Fertilisers (CFCL)"),
+    ("kota-thermal", "Kota Super Thermal Power Station"),  # CONFIRM name
 ]

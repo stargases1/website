@@ -35,6 +35,15 @@ def asset(filename: str) -> str:
     return url_for("static", filename=filename, v=version)
 
 
+def client_logo(slug: str):
+    """URL of a client's logo in static/img/clients/, or None if it hasn't been added yet."""
+    for ext in ("svg", "png", "webp", "jpg", "jpeg"):
+        filename = f"img/clients/{slug}.{ext}"
+        if (STATIC_DIR / filename).is_file():
+            return asset(filename)
+    return None
+
+
 @app.template_filter("chem")
 def chem(text: str) -> Markup:
     """Show chemical subscripts (CO₂, O₂, N₂) as <sub>2</sub> so they match the site font."""
@@ -49,6 +58,7 @@ def inject_globals():
         "whatsapp_link": whatsapp_link,
         "asset": asset,
         "has_asset": lambda filename: (STATIC_DIR / filename).is_file(),
+        "client_logo": client_logo,
         "map_embed": "https://www.google.com/maps?output=embed&q=" + quote(content.BUSINESS["map_query"]),
         "map_link": "https://www.google.com/maps/search/?api=1&query=" + quote(content.BUSINESS["map_query"]),
     }
@@ -60,8 +70,7 @@ def home():
         "index.html",
         products=content.PRODUCTS,
         industries=content.INDUSTRIES,
-        reasons=content.REASONS,
-        steps=content.ORDER_STEPS,
+        clients=content.CLIENTS,
     )
 
 
