@@ -114,9 +114,9 @@ INDUSTRIES = [
 # Client logos: save each file as static/img/clients/<slug>.png (or .svg / .jpg / .webp).
 # Until a logo file exists, the client's name is shown instead.
 CLIENTS = [
-    ("dcm", "DCM Shriram"),                              # CONFIRM name
+    ("dcm", "DCM"),
     ("om-metals", "Om Metals"),
     ("multimetals", "Multimetals"),
     ("cfcl", "Chambal Fertilisers (CFCL)"),
-    ("kota-thermal", "Kota Super Thermal Power Station"),  # CONFIRM name
+    ("kota-thermal", "Thermal (Kota)"),
 ]
