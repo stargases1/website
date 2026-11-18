@@ -246,17 +246,18 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; color: var(--navy);
 .clients { background: var(--frost); }
 .client-list { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
 .client {
-  display: flex; align-items: center; justify-content: center;
-  min-height: 120px; padding: 20px 24px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  min-height: 150px; padding: 20px 16px;
   background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
+  text-align: center;
 }
-.client img { max-width: 100%; max-height: 72px; width: auto; height: auto; object-fit: contain; }
-.client--text span {
-  font-stretch: 112%; font-weight: 800; font-size: 1.05rem; line-height: 1.25;
-  color: var(--navy); text-align: center;
+.client img { max-width: 100%; max-height: 64px; width: auto; height: auto; object-fit: contain; }
+.client-name { font-size: .85rem; font-weight: 600; color: var(--muted); line-height: 1.3; }
+.client--text .client-name {
+  font-stretch: 112%; font-weight: 800; font-size: 1.05rem; line-height: 1.25; color: var(--navy);
 }
 @media (max-width: 980px) { .client-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 560px) { .client-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } .client { min-height: 96px; padding: 16px; } }
+@media (max-width: 560px) { .client-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } .client { min-height: 130px; padding: 16px 12px; } }
 
 /* ---------- Contact ---------- */
 .contact-inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(32px, 5vw, 64px); align-items: stretch; }
