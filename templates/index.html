@@ -81,7 +81,6 @@
         <div class="spec-sheet">
           {% for p in products %}
           <article class="gas" id="{{ p.id }}">
-            <div class="gas-formula{% if p.formula_size %} gas-formula--{{ p.formula_size }}{% endif %}" aria-hidden="true">{{ p.formula | safe }}</div>
             <div class="gas-name">
               <h3>{{ p.name }}</h3>
               <p>{{ p.summary | chem }}</p>

@@ -183,23 +183,19 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; color: var(--navy);
 .spec-sheet { border-top: 2px solid var(--navy); }
 .gas {
   display: grid;
-  grid-template-columns: 150px minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1.2fr);
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1.2fr);
   grid-template-areas:
-    "formula name specs uses"
-    "formula order specs uses";
-  column-gap: 32px; row-gap: 16px;
+    "name specs uses"
+    "order specs uses";
+  column-gap: 40px; row-gap: 16px;
   padding: 36px 0;
   border-bottom: 1px solid var(--line);
 }
-.gas-formula {
-  grid-area: formula;
-  font-stretch: 125%; font-weight: 800; font-size: 4.2rem; line-height: .9;
-  color: var(--navy); letter-spacing: -0.03em;
-}
-.gas-formula--long { font-size: 2.6rem; }
-.gas-formula sub { font-size: .45em; vertical-align: baseline; position: relative; top: .1em; margin-left: .04em; }
 .gas-name { grid-area: name; }
-.gas-name h3 { font-size: 1.5rem; }
+.gas-name h3 {
+  font-stretch: 125%; font-weight: 800; font-size: clamp(1.6rem, 2.4vw, 2rem);
+  line-height: 1.1; letter-spacing: -0.015em;
+}
 .gas-name p { margin-top: 6px; color: var(--muted); max-width: 34ch; }
 
 .gas-specs { grid-area: specs; display: grid; gap: 14px; align-content: start; }
@@ -223,23 +219,19 @@ h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.25; color: var(--navy);
 
 @media (max-width: 980px) {
   .gas {
-    grid-template-columns: 110px minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     grid-template-areas:
-      "formula name name"
-      "formula specs uses"
-      "formula order order";
+      "name name"
+      "specs uses"
+      "order order";
   }
-  .gas-formula { font-size: 3.2rem; }
-  .gas-formula--long { font-size: 2.2rem; }
 }
 @media (max-width: 600px) {
   .gas {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-areas: "formula" "name" "specs" "uses" "order";
+    grid-template-areas: "name" "specs" "uses" "order";
     padding: 30px 0;
   }
-  .gas-formula { font-size: 3rem; }
-  .gas-formula--long { font-size: 2.4rem; }
 }
 
 /* ---------- Industries ---------- */

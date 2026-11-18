@@ -28,20 +28,16 @@ BUSINESS = {
 PRODUCTS = [
     {
         "id": "oxygen",
-        "formula": "O<sub>2</sub>",
-        "formula_text": "O2",
         "name": "Oxygen",
         "summary": "Industrial oxygen for gas cutting, welding and brazing.",
         "specs": [
-            ("Purity", ["99.5%"]),                                     # CONFIRM
+            ("Purity", ["99.97%"]),
             ("Cylinder size", ["7 m³ (47 L) cylinder"]),               # CONFIRM
         ],
         "uses": ["Gas cutting of steel", "Oxy-fuel welding and brazing", "Metal fabrication shops"],
     },
     {
         "id": "carbon-dioxide",
-        "formula": "CO<sub>2</sub>",
-        "formula_text": "CO2",
         "name": "Carbon dioxide",
         "summary": "CO₂ for MIG welding, beverages and fire extinguisher refilling.",
         "specs": [
@@ -52,8 +48,6 @@ PRODUCTS = [
     },
     {
         "id": "nitrogen",
-        "formula": "N<sub>2</sub>",
-        "formula_text": "N2",
         "name": "Nitrogen",
         "summary": "Inert nitrogen, as compressed gas or liquid, for purging, testing and cooling.",
         "specs": [
@@ -64,8 +58,6 @@ PRODUCTS = [
     },
     {
         "id": "argon",
-        "formula": "Ar",
-        "formula_text": "Ar",
         "name": "Argon",
         "summary": "Argon in three grades, for TIG welding through to laboratory work.",
         "specs": [
@@ -76,9 +68,6 @@ PRODUCTS = [
     },
     {
         "id": "dissolved-acetylene",
-        "formula": "C<sub>2</sub>H<sub>2</sub>",
-        "formula_text": "DA",
-        "formula_size": "long",
         "name": "Dissolved acetylene (DA)",
         "short_name": "DA",
         "summary": "Acetylene fuel gas for oxy-acetylene cutting, welding and heating.",
@@ -89,12 +78,10 @@ PRODUCTS = [
     },
     {
         "id": "gas-mixtures",
-        "formula": "Mix",
-        "formula_text": "mixture",
         "name": "Gas mixtures",
         "summary": "Shielding gas mixtures for cleaner, more consistent welds.",
         "specs": [
-            ("Mixtures", ["Argon + CO₂", "Other blends on request"]),  # CONFIRM
+            ("Mixtures", ["Argon + CO₂", "Argon + O₂ + CO₂", "Other blends on request"]),
         ],
         "uses": ["MIG welding of mild steel", "Stainless steel welding", "Mixtures made to your requirement"],
     },
