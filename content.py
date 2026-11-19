@@ -108,3 +108,15 @@ CLIENTS = [
     ("cfcl", "Chambal Fertilisers (CFCL)", True),
     ("kota-thermal", "Thermal (Kota)", False),
 ]
+
+# Track License page (/track-license)
+# Each gas: (id, name shown on the page, list of serial-number ranges, both ends included).
+# A single number can be written as (555, 555). Ranges must not overlap; the build stops if they do.
+# License image for each gas: save it as static/img/licenses/<id>.jpg (or .png / .webp).
+CYLINDER_SERIALS = [
+    ("oxygen", "Oxygen", [(501, 620), (1001, 1160), (1231, 1780), (1806, 1809)]),
+    ("argon", "Argon", [(101, 294), (2001, 2200)]),
+    ("carbon-dioxide", "Carbon dioxide (CO₂)", [(1181, 1230)]),
+    ("nitrogen", "Nitrogen", [(1161, 1180), (1781, 1805)]),
+    ("dissolved-acetylene", "Dissolved acetylene (DA)", [(9001, 9050)]),
+]

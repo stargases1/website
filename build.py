@@ -27,11 +27,19 @@ def main() -> None:
     OUT.mkdir()
 
     client = app.test_client()
-    for route, filename in [("/", "index.html"), ("/robots.txt", "robots.txt")]:
+    pages = [
+        ("/", "index.html"),
+        ("/track-license", "track-license/index.html"),
+        ("/track-license", "track-license.html"),
+        ("/robots.txt", "robots.txt"),
+    ]
+    for route, filename in pages:
         response = client.get(route)
         if response.status_code != 200:
             raise SystemExit(f"Build failed: {route} returned {response.status_code}")
-        (OUT / filename).write_bytes(response.data)
+        target = OUT / filename
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(response.data)
 
     (OUT / "404.html").write_text(NOT_FOUND_PAGE, encoding="utf-8")
     shutil.copytree(ROOT / "static", OUT / "static")

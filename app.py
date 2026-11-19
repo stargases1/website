@@ -44,6 +44,31 @@ def client_logo(slug: str):
     return None
 
 
+def license_image(gas_id: str):
+    """URL of a gas type's license image in static/img/licenses/, or None if not added yet."""
+    for ext in ("jpg", "jpeg", "png", "webp"):
+        filename = f"img/licenses/{gas_id}.{ext}"
+        if (STATIC_DIR / filename).is_file():
+            return asset(filename)
+    return None
+
+
+def cylinder_data():
+    """Serial-number ranges for the Track License page, checked for overlaps."""
+    seen = []
+    data = []
+    for gas_id, name, ranges in content.CYLINDER_SERIALS:
+        for low, high in ranges:
+            if low > high:
+                raise ValueError(f"{name}: range {low}-{high} is back to front")
+            for other, o_low, o_high in seen:
+                if low <= o_high and o_low <= high:
+                    raise ValueError(f"{name} {low}-{high} overlaps {other} {o_low}-{o_high}")
+            seen.append((name, low, high))
+        data.append({"name": name, "ranges": ranges, "license": license_image(gas_id)})
+    return data
+
+
 @app.template_filter("chem")
 def chem(text: str) -> Markup:
     """Show chemical subscripts (CO₂, O₂, N₂) as <sub>2</sub> so they match the site font."""
@@ -72,6 +97,11 @@ def home():
         industries=content.INDUSTRIES,
         clients=content.CLIENTS,
     )
+
+
+@app.route("/track-license")
+def track_license():
+    return render_template("track_license.html", cylinders=cylinder_data())
 
 
 @app.route("/robots.txt")

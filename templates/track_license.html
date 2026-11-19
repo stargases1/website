@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Track License | {{ biz.name }}{% endblock %}
+{% block description %}Check a {{ biz.name }} cylinder by its serial number to see its gas type and license.{% endblock %}
+
+{% block content %}
+    <section class="page-head" aria-labelledby="track-title">
+      <div class="wrap">
+        <h1 id="track-title">Track License</h1>
+        <p class="lede">Enter the serial number on your cylinder to see its gas type and license.</p>
+      </div>
+    </section>
+
+    <section class="section track">
+      <div class="wrap">
+        <form class="track-form" id="track-form" novalidate>
+          <label for="serial">Cylinder serial number</label>
+          <div class="track-row">
+            <input id="serial" name="serial" type="text" inputmode="numeric" autocomplete="off"
+                   placeholder="e.g. 1234" maxlength="10" aria-describedby="serial-hint" required>
+            <button class="btn btn-solid" type="submit">Check cylinder</button>
+          </div>
+          <p class="track-hint" id="serial-hint">Numbers only. You'll find it stamped on the cylinder.</p>
+        </form>
+
+        <div class="track-result" id="track-result" aria-live="polite"></div>
+
+        <noscript><p class="track-hint">Turn on JavaScript in your browser to check a cylinder, or call us on {{ biz.phone_display }}.</p></noscript>
+      </div>
+    </section>
+
+    <template id="tpl-found">
+      <article class="result result-found">
+        <p class="result-serial"></p>
+        <h2 class="result-gas"></h2>
+        <figure class="result-license">
+          <figcaption>License</figcaption>
+          <a class="license-link" target="_blank" rel="noopener"><img class="license-img" alt=""></a>
+          <p class="license-note">Tap the image to open it full size.</p>
+        </figure>
+        <p class="result-nolicense" hidden>The license image for this gas isn't online yet. Call us on <a href="tel:{{ biz.phone_tel }}">{{ biz.phone_display }}</a> for a copy.</p>
+      </article>
+    </template>
+
+    <template id="tpl-missing">
+      <article class="result result-missing">
+        <h2>No cylinder found</h2>
+        <p class="result-text"></p>
+        <p>If the number is correct, call us on <a href="tel:{{ biz.phone_tel }}">{{ biz.phone_display }}</a>.</p>
+      </article>
+    </template>
+
+    <script id="cylinder-data" type="application/json">{{ cylinders | tojson }}</script>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ asset('js/track.js') }}" defer></script>
+{% endblock %}
