@@ -65,7 +65,8 @@ def cylinder_data():
                 if low <= o_high and o_low <= high:
                     raise ValueError(f"{name} {low}-{high} overlaps {other} {o_low}-{o_high}")
             seen.append((name, low, high))
-        data.append({"name": name, "ranges": ranges, "license": license_image(gas_id)})
+        image_id = content.LICENSE_SHARED.get(gas_id, gas_id)
+        data.append({"name": name, "ranges": ranges, "license": license_image(image_id)})
     return data
 
 

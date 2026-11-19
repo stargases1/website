@@ -120,3 +120,8 @@ CYLINDER_SERIALS = [
     ("nitrogen", "Nitrogen", [(1161, 1180), (1781, 1805)]),
     ("dissolved-acetylene", "Dissolved acetylene (DA)", [(9001, 9050)]),
 ]
+
+# Gases that show another gas's license image: {gas id: gas id whose image to use}.
+LICENSE_SHARED = {
+    "nitrogen": "oxygen",
+}
